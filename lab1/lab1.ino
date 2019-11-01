@@ -4,7 +4,6 @@
 #include "buzzer.h"
 
 #define PIN_BUZZER 6
-#define PIN_BUTTON_OFF 5
 
 Buzzer buzzer(PIN_BUZZER);
 
@@ -24,4 +23,5 @@ void loop() {
    // int myNote = Serial.parseInt();
     Serial.println(note);
     buzzer.playSound();
-    }}
+  }
+}
