@@ -1,17 +1,5 @@
 #include <Arduino.h>
 
-
-#define  S0_OUT  2
-#define  S1_OUT  3
-#define  S2_OUT  4
-#define  S3_OUT  5
-
-#define R_OUT 6
-#define G_OUT 7
-#define B_OUT 8
-
-
-
 #include "pitches.h"
 #include "button.h"
 #include "buzzer.h"
@@ -31,12 +19,17 @@ void setup() {
     buzzer.setMelody(notes, durations, melodyLength);
     buzzer.turnSoundOn();
 }
+//joj
 
 void loop() {
-  
+
+    if(Serial()) {
+    String name_note = Serial.write();
+    Serial.println(name_note);
     buzzer.playSound();
     if (buttonOff.wasPressed())
     {
         buzzer.turnSoundOff();
     }
+}
 }
