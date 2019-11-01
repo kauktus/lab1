@@ -11,10 +11,10 @@ public:
         pinMode(pin, OUTPUT);
 
         isEnabled = false;
-        currentNote = 0;
+        //currentNote = 0;
         noteStartedMs = 0;
 
-        notes = 0;
+        note = 0;
         durations = 0;
         melodyLength = 0;
     }
@@ -22,21 +22,21 @@ public:
     void turnSoundOn()
     {
         isEnabled = true;
-        currentNote = 0;
+        //currentNote = 0;
         noteStartedMs = 0;
     }
 
     void turnSoundOff()
     {
         isEnabled = false;
-        currentNote = 0;
+//        currentNote = 0;
         noteStartedMs = 0;
         noTone(pin);
     }
 
-    void setMelody(int _notes[], double _durations[], int _melodyLength)
+    void setMelody(int _note, double _durations[], int _melodyLength)
     {
-        notes = _notes;
+        note = _note;
         durations = _durations;
         melodyLength = _melodyLength;
     }
@@ -46,18 +46,18 @@ public:
         if (!isEnabled)
             return;
 
-        unsigned long duration = round(BUZZER_NOTE_DURATION*durations[currentNote]);
+        unsigned long duration = round(BUZZER_NOTE_DURATION*durations[note]);
         if ((millis() - noteStartedMs) > duration)
         {
-            int note = notes[currentNote];
+            //int note = Serial.parseInt();
             
             if (note == NOTE_SILENCE)
                 noTone(pin);
             else 
-                tone(pin, notes[currentNote]);
+                tone(pin, note);
 
             noteStartedMs = millis();
-            currentNote = (currentNote + 1)%melodyLength;
+            //currentNote = (currentNote + 1)%melodyLength;
         }
     }
 
@@ -65,10 +65,11 @@ private:
     int pin;
     bool isEnabled;
 
-    int currentNote;
+    //int currentNote;
     unsigned long noteStartedMs;
 
-    int* notes;
+    //int* notes;
     double* durations;
     int melodyLength;
+    int note = Serial.parseInt();
 };
