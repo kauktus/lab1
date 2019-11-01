@@ -17,7 +17,7 @@ void setup() {
     buzzer.setMelody(note, durations, melodyLength);
     buzzer.turnSoundOn();
 }
-
+//fofo
 void loop() {
 
     if(Serial.available()) {
