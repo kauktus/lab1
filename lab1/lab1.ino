@@ -11,7 +11,7 @@ Button buttonOff(PIN_BUTTON_OFF);
 Buzzer buzzer(PIN_BUZZER);
 
 
-int notes[] = {NOTE_G3, NOTE_SILENCE, NOTE_G3, NOTE_SILENCE, NOTE_G3, NOTE_SILENCE, NOTE_DS3, NOTE_SILENCE};
+int notes[] = {"pitches.h"};
 double durations[] = {8, 8, 1, 8, 1, 8, 1, 24};
 int melodyLength = 8;
 
@@ -23,13 +23,14 @@ void setup() {
 
 void loop() {
 
-    if(Serial()) {
-    String name_note = Serial.write();
-    Serial.println(name_note);
-    buzzer.playSound();
+    if(Serial.available()) {
+    int num_note = Serial.parseInt();
+    Serial.println(num_note);
+    buzzer.setMelody(notes[num_note], 10, 10);
+    /*buzzer.playSound();
     if (buttonOff.wasPressed())
     {
         buzzer.turnSoundOff();
-    }
+    }*/
 }
 }

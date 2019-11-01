@@ -11,7 +11,7 @@ public:
         state = LOW;
         debounceState = LOW;
 
-        pinMode(pin, INPUT_PULLUP);
+        (pin, INPUT_PULLUP);
     }
 
     bool wasPressed()
