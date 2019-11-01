@@ -16,12 +16,11 @@ void setup() {
     buzzer.setMelody(note, durations, melodyLength);
     buzzer.turnSoundOn();
 }
-//fofo
-void loop() {
 
+void loop() {
     if(Serial.available()) {
    // int myNote = Serial.parseInt();
-    Serial.println(note);
     buzzer.playSound();
+    Serial.println(note);
   }
 }
