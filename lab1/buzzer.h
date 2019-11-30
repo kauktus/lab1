@@ -13,39 +13,46 @@ public:
         isEnabled = false;
         currentNote = 0;
         noteStartedMs = 0;
-
-        notes = 0;
-
-        durations = 0;
-        melodyLength = 0;
     }
 
     void turnSoundOn()
     {
         isEnabled = true;
+        currentNote = 0;
         noteStartedMs = 0;
     }
 
     void turnSoundOff()
     {
         isEnabled = false;
+        currentNote = 0;
         noteStartedMs = 0;
         noTone(pin);
     }
 
-    void setMelody(int _notes[], double _durations[], int _melodyLength)
+    void play(int _note, double _duration, int _melodyLength)
     {
-        notes = _notes;
-        durations = _durations;
+        note = _note;
+        duration = _duration;
         melodyLength = _melodyLength;
     }
 
-    void playSound(int note)
+    void playSound()
     {
-        if (note == NOTE_SILENCE)
-          noTone(pin);
-        else 
-          tone(pin, note);
+        if (!isEnabled)
+            return;
+
+        unsigned long duration = round(BUZZER_NOTE_DURATION*duration);
+        if ((millis() - noteStartedMs) > duration)
+        {   
+            if (note == 0)
+                noTone(pin);
+            else 
+                tone(pin, note);
+
+            noteStartedMs = millis();
+            currentNote = (currentNote + 1)%melodyLength;
+        }
     }
 
 private:
@@ -55,7 +62,7 @@ private:
     int currentNote;
     unsigned long noteStartedMs;
 
-    int* notes;
-    double* durations;
+    int note;
+    double duration;
     int melodyLength;
 };
